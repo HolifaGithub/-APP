@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			function valueAtBit(num, bit) {
+				var two = num.toString(2);
+				return two.slice(two.length - bit, two.length - bit + 1);
+			}
+			console.log(valueAtBit(128, 8));
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class Event{
+				constructor(){
+					this._cache={};
+				}
+				on(type,callback){
+					this._cache[type]=this._cache[type]||[];
+					let fns=this._cache[type];
+					if(fns.indexOf(callback)===-1){
+						fns.push(callback);
+					}
+					return this;
+				}
+				trigger(type,callback,data){
+					let fns=this._cache[type];
+					if(Array.isArray(fns)){
+						fns.forEach((fn)=>{
+							if(callback===fn){
+								fn(data);
+							}
+						})
+					}
+					return this;
+				}
+				off(type,callback){
+					let fns=this._cache[type];
+					if(Array.isArray(fns)){
+						if(callback){
+							let index=fns.indexOf(callback);
+							if(index!==-1){
+								fns.splice(index,1);
+							}
+						}
+						else{
+							fns.length=0;
+						}
+					}
+					return this;
+				}
+			}
+			const event=new Event();
+			function con(a){
+				console.log(a);
+			}
+			function coa(a){
+				console.log(a+a);
+			}
+			event.on('click',con);
+			event.on('click',coa);
+			event.trigger('click',con,6666);
+			event.trigger('click',coa,6666);
+			event.off('click');
+			event.trigger('click',con,6666);
+			event.trigger('click',coa,6666);
+		</script>
+	</body>
+</html>

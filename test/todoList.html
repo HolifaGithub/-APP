@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		*{padding: 0;margin: 0;}
+		body{background-color: #eee;}
+		ul li{list-style: none;font-size: 20px;border-bottom:1px solid #000;padding-left: 50px;background-color: #fff;}
+		#search{width: 600px;height: 300px;margin: 0 auto;text-align: center;}
+		#search input{width: 350px;height: 30px;margin-top: 30px;padding-left: 10px;}
+		#selected{width: 360px;border: 1px solid #000;margin: 0 auto;}
+		#selected li{text-align: left;padding-left: 10px;}
+		#show {width: 500px;height: 200px;margin: 0 auto;border: 1px solid #555;background-color: #fff;border-radius: 10px;overflow: auto;}
+		#show h3{text-align: center;}
+		#show ul li button{float: right;margin-right: 50px;width: 30px;color: red;border: none;margin-top: 8px;font-size: 15px;background-color: #fff;}
+		#show ul li button:hover{cursor: pointer;}
+	</style>
+	<body>
+	<div id="search">
+		<input type="text" placeholder="输入后按回车加入TODO LIST"/>
+		<ul id="selected"></ul>
+	</div>
+    <div id="show">
+    	<h3>TODO LIST</h3>
+    	<ul></ul>
+    </div>
+    <script type="text/javascript">
+    	var search=document.querySelector("#search>input");
+    	var showList=document.querySelector("#show ul"); 
+        var selectedList=document.querySelector("#selected");
+    	search.onkeyup=function(e){
+    		 searchInner=search.value;
+    		if(e.keyCode==13){
+    			if(searchInner!==''){
+			        clearSelectedList()
+    				var li=document.createElement("li");
+    				var span=document.createElement("span");
+    				var button=document.createElement("button");
+    				span.innerHTML=searchInner;
+    				button.innerHTML="x";
+    				li.appendChild(span);
+    				li.appendChild(button);
+    				showList.appendChild(li);
+    				search.value='';
+    			}
+    		}
+    		else{
+                    clearSelectedList()
+			        var lis=showList.querySelectorAll("li");
+			        if(lis.length>0){
+    					for(var i=0;i<lis.length;i++){
+						var span=lis[i].querySelector("span");
+						match(span.innerHTML);
+					}	
+			        }
+    		}
+    	}
+    	showList.onclick=function(e){
+    		if(e.target.nodeName=="BUTTON"){
+    			var ul=e.target.parentElement.parentElement;
+    			var li=e.target.parentElement;
+    			ul.removeChild(li);
+    		}
+    	}
+    	function match(str){
+    		if(search.value!==''){
+    		var regExp=new RegExp(`${search.value}`);   
+                var result=str.match(regExp);
+                 if(result!==null){
+    		     var length=result[0].length;
+    			 var span=document.createElement("span");
+    			 var li=document.createElement("li");
+    			 span.innerHTML=result[0];
+    			 span.style.color="red";
+    			 li.innerHTML=`${str.slice(0,result["index"])}`;
+    			 li.appendChild(span);
+    			 li.innerHTML +=`${str.slice(result["index"]+length)}`
+    			 selectedList.appendChild(li);	
+    			 }
+    	}
+    	}
+    	function clearSelectedList(){
+    		var slis=selectedList.querySelectorAll("li");
+			for(var i=0;i<slis.length;i++){
+		    selectedList.removeChild(slis[i]);	        	
+			      }
+    	}
+    </script>
+	</body>
+</html>

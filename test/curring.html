@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+		const curring=(fn,arr=[])=>{
+		    let length=fn.length;
+		    return (...args)=>{
+		      arr=arr.concat(args);
+		      if(arr.length<length){
+		          return curring(fn,arr);
+		      }
+		      return fn(...arr);
+		    }
+		}
+		
+		const add=(a,b,c,d,e=1)=>{
+		    return a+b+c+d+e;
+		}
+		
+		console.log(curring(add)(1)(2)(3,4));
+		</script>
+	</body>
+</html>

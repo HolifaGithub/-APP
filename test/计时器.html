@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function count(start, end) {
+    (function(){
+        if (start<=end){
+            console.log(start++);
+        }
+    })();
+    var timer=setInterval(function(){
+        if (start<=end){
+            console.log(start++);
+        }
+    },100);
+    return {
+        canel:function(){
+            clearInterval(timer);
+        }
+    }
+}  
+count(1,10);
+		</script>
+	</body>
+</html>

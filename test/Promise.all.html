@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+		function promiseAll(arr){
+			if(Array.isArray(arr)){
+				let result=[];
+				return new Promise((resolve,reject)=>{
+					let i=0;
+					next();
+					function next(){
+						arr[i].then((res)=>{
+							result.push(res);
+							i++;
+							if(i===arr.length){
+							  return resolve(result);
+							}
+							else{
+								next();
+							}
+						}).catch((err)=>{
+							return reject(err);
+						})
+					}
+				})
+			  }
+			else{
+				console.log('参数必须为数组！');
+			}
+			}
+		</script>
+	</body>
+</html>

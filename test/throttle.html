@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div style="height: 5000px;"></div>
+		<script type="text/javascript">
+			var n=0;
+			function throttle(func,delay){  //节流
+				var startTime=Date.now();
+				return function(){
+					var curTime=Date.now();  //当前时间
+					var remainTime=delay-(curTime-startTime);
+					if(remainTime<=0){
+						func.apply(this,arguments);
+						startTime=Date.now();
+					}
+				}
+			}
+			function event(){
+				console.log(n++);
+			}
+			window.addEventListener('scroll',throttle(event,1000));
+		</script>
+	</body>
+</html>

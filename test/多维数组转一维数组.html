@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//1.递归方法实现扁平化
+			function flatten(arr){
+				var res=[];
+				if(arr.length>0){
+				for(var i=0;i<arr.length;i++){
+					if(Array.isArray(arr[i])){
+						res=res.concat(flatten(arr[i]));
+					}
+					else
+					   res.push(arr[i]);
+			}
+		    }
+				return res;
+			}
+            //2.reduce方法实现扁平化
+//          function flatten(arr){
+//          	return arr.reduce((result,item)=>{
+//          		return result.concat(Array.isArray(item)?flatten(item):item);
+//          	},[])
+//          }
+            //3.toString&&split实现扁平化
+//          function flatten(arr){
+//          	return arr.toString().split(',').map((item)=>{
+//          		return parseInt(item);
+//          	})
+//          }
+            //4.join&&split实现扁平化
+//          function flatten(arr){
+//          	return arr.join().split(',').map((item)=>{
+//          		return parseInt(item);
+//          	})
+//          }
+            //5.拓展运算符
+//          function flatten(arr){
+//          	while(arr.some((item)=> Array.isArray(item))){
+//          		arr=[].concat(...arr);
+//          	}
+//          	return arr;
+//          }
+	        var arr=[1,2,[3,4,5],[6,7],8,[9,[10,11,12]]];
+			console.log(flatten(arr));
+		</script>
+	</body>
+</html>

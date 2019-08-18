@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+//			var result=Math.random().toString(12).slice(2);
+//			console.log(result);
+
+           function random(n){
+           	var randomString="";
+           	for(var i=0;i<n;i++){
+           	var random=Math.floor(Math.random()*3);
+           	var randomNumber,randomLetterNumber,randomCapitalLetter,randomLowerCaseLetter;
+          	randomNumber=Math.floor(Math.random()*9+1);
+          	randomLetterNumber=Math.floor(Math.random()*26);
+            randomLowerCaseLetter=String.fromCharCode(97+randomLetterNumber);
+          	randomCapitalLetter=String.fromCharCode(65+randomLetterNumber);
+           	var randomArray=[randomNumber,randomCapitalLetter,randomLowerCaseLetter];
+           	var choose=randomArray[random];
+           	randomString +=choose;
+           	}
+           	console.log(randomString);
+           	for (var j=0;j<randomString.length;j++){
+           		var sumAscii =randomString.slice(j,j+1).charCodeAt();
+           	}
+           	 var result=sumAscii%62;
+           	 console.log(result);
+           }
+           random(5)
+		</script>
+	</body>
+</html>
